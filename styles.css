@@ -1,0 +1,171 @@
+/* Paleta de colores y variables globales */
+:root {
+    --bg-color: #0f172a;
+    --text-color: #f8fafc;
+    --primary-color: #3b82f6;
+    --primary-hover: #2563eb;
+    --accent-color: #eab308;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.app-container {
+    width: 100%;
+    max-width: 800px;
+    padding: 2rem;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 3rem;
+    margin-bottom: 2rem;
+    background: linear-gradient(to right, #60a5fa, #c084fc);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+/* Contenedor relativo para posicionar el puntero fijo */
+.ruleta-container {
+    position: relative;
+    width: 300px;
+    height: 300px;
+}
+
+/* La ruleta giratoria */
+.ruleta {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    transition: transform 3s cubic-bezier(0.25, 0.1, 0.25, 1);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+    background: #1e293b;
+    border: 8px solid #334155;
+    overflow: hidden;
+}
+
+.ruleta img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 50%;
+}
+
+/* El puntero estilizado como una flecha */
+.puntero {
+    position: absolute;
+    top: -15px; /* Ajusta este valor para acercarlo o alejarlo del borde */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0; 
+    height: 0; 
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-top: 30px solid var(--accent-color);
+    z-index: 10;
+    filter: drop-shadow(0px 4px 4px rgba(0,0,0,0.5));
+}
+
+.primary-btn {
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    color: white;
+    border: none;
+    padding: 1.2rem 3rem;
+    font-size: 1.3rem;
+    font-weight: 800;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-top: 1rem;
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4), inset 0px 2px 4px rgba(255, 255, 255, 0.3);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.primary-btn:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 12px 25px -3px rgba(139, 92, 246, 0.6), inset 0px 2px 4px rgba(255, 255, 255, 0.4);
+    background: linear-gradient(135deg, #2563eb, #7c3aed);
+}
+
+.primary-btn:active {
+    transform: translateY(1px) scale(0.98);
+    box-shadow: 0 4px 10px rgba(59, 130, 246, 0.4);
+}
+
+.primary-btn:disabled {
+    background: #475569;
+    color: #94a3b8;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+    text-shadow: none;
+}
+
+#resultado {
+    font-size: 1.5rem;
+    font-weight: 600;
+    min-height: 2rem;
+}
+
+/* Media Queries para diseño Responsive */
+@media (max-width: 600px) {
+    header h1 {
+        font-size: 2.2rem;
+        margin-bottom: 1rem;
+    }
+
+    .ruleta-container {
+        width: 250px;
+        height: 250px;
+    }
+
+    .puntero {
+        border-left-width: 12px;
+        border-right-width: 12px;
+        border-top-width: 24px;
+        top: -10px;
+    }
+
+    .primary-btn {
+        padding: 1rem 2rem;
+        font-size: 1.1rem;
+    }
+
+    #resultado {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 350px) {
+    .ruleta-container {
+        width: 180px;
+        height: 180px;
+    }
+    
+    header h1 {
+        font-size: 1.8rem;
+    }
+}
