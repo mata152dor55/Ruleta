@@ -1,4 +1,42 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // ===== LÓGICA DE LOGIN =====
+    const loginScreen  = document.getElementById('login-screen');
+    const gameScreen   = document.getElementById('game-screen');
+    const loginForm    = document.getElementById('login-form');
+    const usernameInput = document.getElementById('username');
+    const passwordInput = document.getElementById('password');
+    const usernameError = document.getElementById('username-error');
+    const passwordError = document.getElementById('password-error');
+
+    function validateField(input, errorEl) {
+        const isEmpty = input.value.trim() === '';
+        input.classList.toggle('input-error', isEmpty);
+        errorEl.classList.toggle('visible', isEmpty);
+        return !isEmpty;
+    }
+
+    // Limpiar errores al escribir
+    usernameInput.addEventListener('input', () => validateField(usernameInput, usernameError));
+    passwordInput.addEventListener('input', () => validateField(passwordInput, passwordError));
+
+    loginForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const validUser = validateField(usernameInput, usernameError);
+        const validPass = validateField(passwordInput, passwordError);
+
+        if (validUser && validPass) {
+            // Cambiar de pantalla con fade
+            loginScreen.style.opacity = '0';
+            loginScreen.style.transition = 'opacity 0.4s ease';
+            setTimeout(() => {
+                loginScreen.classList.add('hidden');
+                gameScreen.classList.remove('hidden');
+            }, 400);
+        }
+    });
+
+    // ===== LÓGICA DE LA RULETA =====
+
     const girarBtn = document.getElementById('girar-btn');
     const ruleta = document.querySelector('.ruleta');
     const resultadoTexto = document.getElementById('resultado');
